@@ -5,7 +5,7 @@ import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const {user, setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery} = useAppContext()
+  const {user, setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery, cartCount} = useAppContext()
 
   const logout = async () => {
     setUser(null)
@@ -28,9 +28,9 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <div className="hidden sm:flex items-center gap-8">
-        <NavLink to='/'>Home</NavLink>
-        <NavLink to='/products'>Products</NavLink>
-        <NavLink to='/'>Contact</NavLink>
+        <NavLink to='/' className='text-gray-600 hover:text-gray-900'>Home</NavLink>
+        <NavLink to='/products' className='text-gray-600 hover:text-gray-900'>Products</NavLink>
+        <NavLink to='/' className='text-gray-600 hover:text-gray-900'>Contact</NavLink>
 
         <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
           <input
@@ -45,7 +45,7 @@ const Navbar = () => {
         <div onClick={() => navigate('/cart')} className="relative cursor-pointer">
           <img src={assets.nav_cart_icon} alt="cartImg" className="w-6 opacity-80" />
           <button className="absolute -top-2 -right-3 text-xs text-white bg-primary-dull w-[18px] h-[18px] rounded-full">
-            3
+            {cartCount()}
           </button>
         </div>
 
@@ -65,14 +65,23 @@ const Navbar = () => {
         )}
       </div>
 
-      <button
-        onClick={() => (open ? setOpen(false) : setOpen(true))}
-        aria-label="Menu"
-        className="sm:hidden"
-      >
-        {/* Menu Icon SVG */}
-        <img src={assets.menu_icon} alt="menuImg" />
-      </button>
+        <div className="flex items-center gap-6 sm:hidden">
+          <div onClick={() => navigate('/cart')} className="relative cursor-pointer">
+            <img src={assets.nav_cart_icon} alt="cartImg" className="w-6 opacity-80" />
+            <button className="absolute -top-2 -right-3 text-xs text-white bg-primary-dull w-[18px] h-[18px] rounded-full">
+              {cartCount()}
+            </button>
+          </div>
+
+          <button
+            onClick={() => (open ? setOpen(false) : setOpen(true))}
+            aria-label="Menu"
+            className=""
+          >
+            {/* Menu Icon SVG */}
+            <img src={assets.menu_icon} alt="menuImg" />
+          </button>
+        </div>
 
       {/* Mobile Menu */}
       { open && (

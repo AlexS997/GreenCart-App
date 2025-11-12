@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { assets, dummyProducts } from "../assets/assets";
 import { useAppContext } from '../context/AppContext';
 
@@ -6,9 +5,8 @@ const ProductCard = ({product}) => {
 
   const {currency, addToCart, removeCartItem, cartItems, navigate} = useAppContext()
 
-
   return product && (
-        <div className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white w-full">
+        <div onClick={() => {navigate(`/products/${product.category.toLowerCase()}/${product._id}`); scrollTo(0,0) }} className="border border-gray-500/20 rounded-md md:px-4 px-3 py-2 bg-white w-full">
           <div className="group cursor-pointer flex items-center justify-center px-2">
             <img
               className="group-hover:scale-105 transition max-w-26 md:max-w-36"
@@ -53,13 +51,18 @@ const ProductCard = ({product}) => {
                   </button>
                 ) : (
                   <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-[34px] bg-primary/25 rounded select-none">
+                    
                     <button
                       onClick={() => {removeCartItem(product._id)}}
                       className="cursor-pointer text-md px-2 h-full"
                     >
                       -
                     </button>
-                    <span className="w-5 text-center">{cartItems[product._id]}</span>
+
+                    <span className="w-5 text-center">
+                      {cartItems[product._id]}
+                    </span>
+
                     <button
                       onClick={() => {addToCart(product._id)}}
                       className="cursor-pointer text-md px-2 h-full"
