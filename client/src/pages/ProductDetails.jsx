@@ -66,8 +66,8 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="mt-6">
-                        <p className="text-gray-500/70 line-through">${product.price}</p>
-                        <p className="text-2xl font-medium">${product.offerPrice}</p>
+                        <p className="text-gray-500/70 line-through">{currency}{product.price}</p>
+                        <p className="text-2xl font-medium">{currency}{product.offerPrice}</p>
                         <span className="text-gray-500/70">(inclusive of all taxes)</span>
                     </div>
 
@@ -110,7 +110,6 @@ const ProductDetails = () => {
                 <button onClick={() => {navigate('/products'); scrollTo(0,0)}} className="mx-auto cursor-pointer px-12 my-16 py-2.5 border rounded text-primary hover:bg-primary/10 transition">
                     See more
                 </button>
-                Sei venuta perché ti mancavo, vero?
             </div>
         </div>
     )

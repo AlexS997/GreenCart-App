@@ -793,7 +793,7 @@ export const dummyAddress = [
     city: "Main City",
     state: "New State",
     zipcode: 123456,
-    country: "IN",
+    country: "US",
     phone: "1234567890",
   },
 ];

@@ -10,14 +10,20 @@ import ProductCategory from "./pages/ProductCategory"
 import ProductDetails from "./pages/ProductDetails"
 import Cart from "./pages/Cart"
 import Address from "./pages/Address"
+import Orders from "./pages/Orders"
+import SellerLogin from "./components/seller/SellerLogin"
+import Dashboard from "./pages/seller/Dashboard"
+import AddProduct from "./pages/seller/AddProduct"
+import ProductList from "./pages/seller/ProductList"
+import Order from "./pages/seller/Orders"
 
 const App = () => {
 
   const isSellerPath = useLocation().pathname.includes('seller')
-  const { showUserLogin } = useAppContext()
+  const { showUserLogin, isSeller } = useAppContext()
 
   return (
-    <div>
+    <div className="text-default min-h-screen text-gray-700 bg-white">
       {isSellerPath ? null : <Navbar />}
       {!showUserLogin ? null : <Login />}
 
@@ -31,6 +37,12 @@ const App = () => {
           <Route path="/products/:category/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/add-address" element={<Address />} />
+          <Route path="/my-orders" element={<Orders />} />
+          <Route path="/seller" element={!isSeller ? <SellerLogin /> : <Dashboard />}>
+            <Route index element={isSeller ? <AddProduct /> : null} />
+            <Route path="product-list" element={<ProductList />} />
+            <Route path="orders" element={<Order />} />
+          </Route>
         </Routes>
       </div>
       

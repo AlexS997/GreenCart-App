@@ -3,7 +3,7 @@ import { assets, dummyAddress } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 
 const Cart = () => {
-  const {products, cartItems, removeCartItem, cartCount, updateCartItems, navigate, cartAmount} = useAppContext()
+  const {products, currency, cartItems, removeCartItem, cartCount, updateCartItems, navigate, cartAmount} = useAppContext()
 
   const [cartArray, setCartArray] = useState([])
   const [address, setAddress] = useState(dummyAddress)
@@ -87,7 +87,7 @@ const Cart = () => {
             </div>
             
             <p className="text-center">
-              ${product.offerPrice * product.quantity}
+              {currency}{product.offerPrice * product.quantity}
             </p>
 
             <button onClick={() => removeCartItem(product._id)} className="cursor-pointer mx-auto">
@@ -157,7 +157,7 @@ const Cart = () => {
         <div className="text-gray-500 mt-4 space-y-2">
           <p className="flex justify-between">
             <span>Price</span>
-            <span>${cartAmount()}</span>
+            <span>{currency}{cartAmount()}</span>
           </p>
 
           <p className="flex justify-between">
@@ -167,12 +167,12 @@ const Cart = () => {
 
           <p className="flex justify-between">
             <span>Tax (2%)</span>
-            <span>${cartAmount() * 2 / 100}</span>
+            <span>{currency}{cartAmount() * 2 / 100}</span>
           </p>
 
           <p className="flex justify-between text-lg font-medium mt-3">
             <span>Total Amount:</span>
-            <span>${cartAmount() + cartAmount() * 2 / 100}</span>
+            <span>{currency}{cartAmount() + cartAmount() * 2 / 100}</span>
           </p>
         </div>
 
